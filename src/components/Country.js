@@ -26,23 +26,26 @@ export default function Country() {
     const countryStatus = useSelector((state) => state.admin.countryStatus)
 
     let detailText = countryStatus.pop()
-    
+
     useEffect(() => {
         dispatch(adminActions.getCountryStatus(countryName, start_date, end_date));
     }, [dispatch, countryName, start_date, end_date])
 
-    const handleSubmit = (event) =>{
+    const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(adminActions.getCountryStatus(countryName, start_date, end_date));
     }
-   
-    
+
+
 
     return (
         <div className="container">
             <Title />
             <div className="my-5">
-                <h3>{countryName} Covid Overview</h3>
+                <div className="d-flex justify-content-between">
+                    <h3>{countryName} Covid Overview</h3>
+                    <a href="/" className="btn btn-rounded btn-outline-primary btn-block">Back to country list</a>
+                </div>
 
                 <form onSubmit={handleSubmit} className="mt-4">
                     <div className="row">
@@ -55,7 +58,7 @@ export default function Country() {
                             />
                         </div>
 
-                        <div className= "form-group col-md-3" >
+                        <div className="form-group col-md-3" >
                             <label htmlFor="date">To</label>
                             <DatePicker
                                 className="form-control"
@@ -68,18 +71,20 @@ export default function Country() {
             </div>
 
 
-            {detailText && 
+            {detailText ?
                 <div className="row">
+                    <Card color={"text-primary"} title={"Confirmed Cases"} value={detailText.Confirmed} />
                     <Card color={"text-info"} title={"Active Cases"} value={detailText.Active} />
                     <Card color={"text-success"} title={"Recovered Cases"} value={detailText.Recovered} />
                     <Card color={"text-danger"} title={"Deaths"} value={detailText.Deaths} />
                 </div>
+
+            :
+                <div>No data found for this country</div>
             }
 
 
             {countryStatus.length > 0 && <LineChart lineData={countryStatus} width={400} height={300} />}
-            {/* {countryStatus && <LineChart lineData={countryStatus} width={400} height={300} />} */}
-            {/* <LineChart2/> */}
         </div>
     )
 }

@@ -28,19 +28,6 @@ export default function CountryList() {
         <div>
             <SearchCountryData data={countryList} change={setCountryList}/>
             
-            {/* {countryList && countryList.length > 0 &&
-                countryList.map((country, i) => {
-                    return (
-                        <div className="card p-3 mb-2" key={i}>
-                            <div className="d-flex justify-content-between align-items-center">
-                               <h5 className="mb-0">{country.Country} ({country.ISO2})</h5> 
-                               <a className="btn btn-primary" href= {`/country/${country.Country}`}>View Cases</a>
-                            </div>
-                        </div>
-                    )
-                })
-            } */}
-
             {searchList.length > 0 ? 
                 searchList.map((country, i) => {
                     return (
