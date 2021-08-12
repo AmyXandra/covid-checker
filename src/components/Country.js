@@ -25,15 +25,15 @@ export default function Country() {
     const [end_date, setEndDate] = useState(newDate);
 
     const countryStatus = useSelector((state) => state.admin.countryStatus)
-    console.log()
+
+    let detailText = countryStatus.pop()
+    
     useEffect(() => {
         dispatch(adminActions.getCountryStatus(countryName, start_date, end_date));
     }, [dispatch, countryName, start_date, end_date])
 
-    // const [submitted, setSubmitted] = useState(false);
     const handleSubmit = (event) =>{
         event.preventDefault();
-        // setSubmitted(true);
         dispatch(adminActions.getCountryStatus(countryName, start_date, end_date));
     }
    
@@ -69,16 +69,18 @@ export default function Country() {
             </div>
 
 
-            <div className="row">
-                <Card icon={"hfh"} title={"Active Cases"} value={"50"} />
-                <Card icon={"hfh"} title={"Recovered Cases"} value={"50"} />
-                <Card icon={"hfh"} title={"Deaths"} value={"2"} />
-            </div>
+            {detailText && 
+                <div className="row">
+                    <Card color={"text-info"} title={"Active Cases"} value={detailText.Active} />
+                    <Card color={"text-success"} title={"Recovered Cases"} value={detailText.Recovered} />
+                    <Card color={"text-danger"} title={"Deaths"} value={detailText.Deaths} />
+                </div>
+            }
 
 
             {countryStatus.length > 0 && <LineChart lineData={countryStatus} width={400} height={300} />}
             {/* {countryStatus && <LineChart lineData={countryStatus} width={400} height={300} />} */}
-            <LineChart2/>
+            {/* <LineChart2/> */}
         </div>
     )
 }

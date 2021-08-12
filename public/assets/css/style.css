@@ -5,3 +5,5 @@
 .card{
     background: #090909 !important;
 }
+
+.line-chart    {        border: 1px solid lightgray;    }

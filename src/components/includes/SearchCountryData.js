@@ -30,11 +30,11 @@ export default function SearchCountryData(data) {
 
 
     return (
-        <div className="mb-4">
-            <form onSubmit={handleSubmit}>
+        <div className="mb-4 d-flex justify-content-between">
+            <form className="w-100" onSubmit={handleSubmit}>
                 <div className="row">
                     <div className={"form-group col-md-4" + (submitted && !search ? " is-invalid" : "")}>
-                        <input className="form-control" name="search" placeholder="Search country" onChange={handleSearch} />
+                        <input className="form-control w-100" name="search" placeholder="Search country" onChange={handleSearch} />
                     </div>
 
                     <div className="col-md-2">
@@ -44,6 +44,9 @@ export default function SearchCountryData(data) {
                     </div>
                 </div>
             </form>
+            <div>
+                <a href="/" className="btn btn-rounded btn-outline-primary btn-block">All Countries</a>
+            </div>
         </div>
 
 
