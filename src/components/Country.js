@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { adminActions } from '../redux/actions/adminActions';
 import { useParams } from 'react-router-dom';
 import LineChart from './includes/LineChart';
-import LineChart2 from './includes/fake';
 import Title from './includes/Title';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";

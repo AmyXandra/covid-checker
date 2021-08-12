@@ -20,7 +20,6 @@ function getAllCountryList(dispatch,setCountryList){
 function getCountryStatus(dispatch, countryName, start_date, end_date){
     axios.get(`https://api.covid19api.com/country/${countryName}?from=${moment(start_date).format('YYYY-MM-DD')}&to=${moment(end_date).format('YYYY-MM-DD')}`)
     .then((data) => {
-        console.log('data',data.data)
         dispatch(onSuccess(data.data));
     })
     .catch(error => {
