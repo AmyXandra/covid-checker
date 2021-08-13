@@ -15,6 +15,15 @@ const createLineChart = async (props) => {
   const x = d3.scaleTime().range([0, width]);
   const y = d3.scaleLinear().range([height, 0]);
 
+  const activeline = d3
+    .line()
+    .x(function (d) {
+      return x(d.date);
+    })
+    .y(function (d) {
+      return y(d.active);
+    });
+
   const deathline = d3
     .line()
     .x(function (d) {
@@ -35,14 +44,7 @@ const createLineChart = async (props) => {
       return y(d.recovered);
     });
 
-  const activeline = d3
-    .line()
-    .x(function (d) {
-      return x(d.date);
-    })
-    .y(function (d) {
-      return y(d.active);
-    });
+  
 
 
   const svg = d3
@@ -85,10 +87,18 @@ const createLineChart = async (props) => {
   y.domain([
     0,
     d3.max(data, function (d) {
-      return d.value;
+      return d.active;
     })
   ]);
 
+  svg.append("path")
+    .data([data])
+    .attr("class", "line")
+    .attr("d", activeline)
+    .attr("stroke", "steelblue")
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-linecap", "round")
+    .attr("stroke-width", 1.5);
 
   svg.append("path")
     .data([data])
@@ -103,15 +113,6 @@ const createLineChart = async (props) => {
     .attr("class", "line")
     .attr("d", recoveredline)
     .attr("stroke", "green")
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-linecap", "round")
-    .attr("stroke-width", 1.5);
-
-  svg.append("path")
-    .data([data])
-    .attr("class", "line")
-    .attr("d", activeline)
-    .attr("stroke", "steelblue")
     .attr("stroke-linejoin", "round")
     .attr("stroke-linecap", "round")
     .attr("stroke-width", 1.5);
